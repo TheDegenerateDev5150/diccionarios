@@ -32,6 +32,8 @@ index.html.var
 index.go
 login.htm
 login.html
+inspection.aspx
+research.aspx 
 build.xml
 /..;/
 ..\;
