@@ -14,8 +14,6 @@ Colección de **diccionarios (wordlists)** en texto plano pensados para pruebas 
 
 Este repositorio es el complemento natural de [`hackingyseguridad/fuzzer`](https://github.com/hackingyseguridad/fuzzer): sus scripts (`fuzzer.sh`, `directorios.sh`, `403bypass*.sh`, etc.) consumen directamente estos ficheros `.txt` como diccionarios de entrada.
 
-> ⚠️ **Aviso legal:** estos diccionarios están pensados exclusivamente para auditorías de seguridad autorizadas, laboratorios propios (CTF, entornos de prueba) o programas de *bug bounty* que permitan explícitamente pruebas de fuerza bruta/fuzzing. Usarlos contra sistemas de terceros sin autorización puede constituir un delito. El uso es responsabilidad exclusiva de quien lo ejecuta.
-
 ---
 
 ## Tabla de contenidos
