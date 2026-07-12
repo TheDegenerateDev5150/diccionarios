@@ -113,7 +113,6 @@ wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/Goo
 | `ike.txt` | Protocolos / VPN | Diccionario para ataques a VPNs con IKE (Internet Key Exchange) | `ike-scan`, `psk-crack` |
 | `http-fingerprints.lua.zip` | Fingerprinting | Script/base de datos Lua de huellas HTTP (identificación de servidores/dispositivos) | Nmap NSE (`http-fingerprints.lua`) |
 
-> Nota: el listado de ficheros de GitHub se trunca en "View all files"; si el repositorio incorpora nuevos diccionarios (por ejemplo `dorks.txt` mencionado en versiones previas del README), revisa el árbol completo del repositorio para confirmar el nombre exacto vigente.
 
 ---
 
@@ -253,7 +252,64 @@ sh fuzzer.sh https://dominio.com
 sh directorios.sh https://dominio.com
 ```
 
-De este modo los scripts del repositorio `fuzzer` (que esperan encontrar `ficheros.txt`, `carpetas.txt`, `carpetas2.txt` en su propio directorio) usan directamente las wordlists de este repositorio.
+
+## Cómo construir la respuesta
+
+1. **Identifica el objetivo de la prueba** que pide el usuario (login, directorios, XSS, subdominios...) y localiza la fila correspondiente en la tabla.
+2. **Elige el diccionario más específico** antes que el genérico: p. ej. si el objetivo es claramente PHP, prioriza `php.txt` sobre `ficheros.txt` genérico; si el usuario ya mencionó `hackingyseguridad/fuzzer`, recuerda que ese repo espera los ficheros `ficheros.txt`, `carpetas.txt` y `carpetas2.txt` en su propio directorio.
+3. **Genera el comando concreto** con la herramienta sugerida, sustituyendo `dominio.com`/URL por el objetivo que indique el usuario. Ejemplos de referencia:
+
+```bash
+# Fuerza bruta de login
+hydra -L usuarios.txt -P claves.txt dominio.com http-post-form \
+  "/login:user=^USER^&pass=^PASS^:Credenciales incorrectas"
+
+# Descubrimiento de carpetas
+dirsearch -u https://dominio.com -w carpetas.txt -e php,asp,aspx,jsp,html -x 400-499,500-599
+
+# Fuzzing de ficheros
+ffuf -u https://dominio.com/FUZZ -w ficheros.txt -mc 200,301,302,403
+
+# Fuzzing de parámetros
+ffuf -u "https://dominio.com/index.php?FUZZ=1" -w parametros.txt -fs 0
+
+# XSS
+dalfox url "https://dominio.com/buscar?q=FUZZ" -w xss.txt
+
+# SQLi
+sqlmap -u "https://dominio.com/producto?id=1" --level=3 --risk=2
+
+# Path Traversal
+while read payload; do
+  curl -s -o /dev/null -w "%{http_code} $payload\n" "https://dominio.com/download?file=$payload"
+done < pathtraversal.txt
+
+# Subdominios
+sed 's/$/.dominio.com/' subdominios.txt | httpx -silent -status-code
+
+# IKE/VPN
+ike-scan -M dominio.com
+psk-crack -d ike.txt handshake.psk
+```
+
+4. **Si la tarea combina varias fases** (p. ej. descubrir parámetro y luego probar payload), encadénalas: primero `parametros.txt`, después `xss.txt`/`sqli.txt`/`ssrf.txt` sobre el parámetro encontrado.
+5. **Recuerda buenas prácticas**: ajustar hilos/rate-limit para no provocar denegación de servicio, empezar con diccionarios pequeños antes de escalar a variantes ampliadas (`usuarios0/1.txt`, `claves0/2/3.txt`), y guardar la salida (`> resultado.txt`) para correlacionar hallazgos entre fases.
+
+## Integración con hackingyseguridad/fuzzer
+
+Si el usuario también usa el repositorio de scripts [`hackingyseguridad/fuzzer`](https://github.com/hackingyseguridad/fuzzer), indícale que copie los diccionarios relevantes al directorio del fuzzer antes de ejecutarlo:
+
+```bash
+git clone https://github.com/hackingyseguridad/fuzzer
+git clone https://github.com/hackingyseguridad/diccionarios
+cd fuzzer
+cp ../diccionarios/ficheros.txt ../diccionarios/carpetas.txt ../diccionarios/carpetas2.txt .
+sh fuzzer.sh https://dominio.com
+sh directorios.sh https://dominio.com
+```
+
+
+
 
 ---
 
