@@ -12,7 +12,33 @@
 
 Colección de **diccionarios (wordlists)** en texto plano pensados para pruebas de seguridad web: fuerza bruta de usuarios/contraseñas, descubrimiento de ficheros y carpetas, fuzzing de parámetros, payloads de XSS/SQLi/Path Traversal/SSRF, Google Dorks y enumeración de subdominios.
 
-Este repositorio es el complemento natural de [`hackingyseguridad/fuzzer`](https://github.com/hackingyseguridad/fuzzer): sus scripts (`fuzzer.sh`, `directorios.sh`, `403bypass*.sh`, etc.) consumen directamente estos ficheros `.txt` como diccionarios de entrada.
+| Objetivo de la prueba | Diccionario(s) | Herramienta sugerida |
+|---|---|---|
+| Fuerza bruta de login (usuario) | `usuarios.txt`, `usuarios0.txt`, `usuarios1.txt` | `hydra`, `medusa`, `patator` |
+| Fuerza bruta de login (password) | `claves.txt`, `claves0.txt`, `claves2.txt`, `claves3.txt` | `hydra`, `medusa`, `john` |
+| Login en castellano / objetivo hispanohablante | `diccionario.txt` | `hydra`, `wpscan` |
+| Dispositivos Cisco | `clavescisco.txt` | `hydra` (módulo cisco) |
+| VPN IPsec / IKE (PSK) | `ike.txt` | `ike-scan`, `psk-crack` |
+| Descubrir carpetas | `carpetas.txt`, `carpetas2.txt`, `directorios.txt` | `dirsearch`, `dirb`, `ffuf` |
+| Descubrir ficheros sueltos | `ficheros.txt`, `ficheros2.txt`, `archivos.txt` | `ffuf`, `wfuzz`, `fuzzer.sh` |
+| Objetivo IIS | `archivos_iis.txt` | `dirsearch`, `ffuf` |
+| Endpoints de API | `api.txt` | `ffuf`, `wfuzz` |
+| Objetivo ASP/ASP.NET | `asp.txt`, `apsx.txt` | `dirsearch -e asp,aspx` |
+| Objetivo PHP | `php.txt` | `dirsearch -e php` |
+| Objetivo Java/JSP | `jsp.txt` | `dirsearch -e jsp` |
+| Objetivo HTML estático | `htm.txt` | `dirsearch -e htm,html` |
+| Ficheros JavaScript | `js.txt` | `ffuf`, `dirsearch -e js` |
+| Config/XML/WSDL | `xml.txt` | `dirsearch -e xml` |
+| Scripts CGI antiguos | `cgi.txt` | `dirsearch`, `nikto` |
+| Descubrir parámetros ocultos | `parametros.txt` | `ffuf` (modo parámetro), `Arjun` |
+| Probar XSS | `xss.txt` | `dalfox`, `xsser`, Burp Intruder |
+| Probar SQLi | `sqli.txt` | `sqlmap`, Burp Intruder |
+| Probar SSRF | `ssrf.txt` | Burp Intruder, `ffuf` |
+| Probar Path Traversal | `pathtraversal.txt` | `ffuf`, `wfuzz`, Burp Intruder |
+| Enumerar subdominios | `subdominios.txt`, `subdominios2.txt`, `subdominios3.txt` | `httpx`, `gobuster dns`, `amass` |
+| Reconocimiento OSINT vía buscador | `GoogleHackingDorks.txt` | búsqueda manual en Google/Bing |
+| Fingerprinting HTTP con Nmap | `http-fingerprints.lua.zip` | Nmap NSE |
+
 
 ---
 
