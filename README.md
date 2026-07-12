@@ -1,101 +1,237 @@
-<img style="float:left" alt="http://hackingyseguridad.com/" src="https://github.com/hackingyseguridad/diccionarios/blob/master/banner.png">
+![banner](https://github.com/hackingyseguridad/diccionarios/raw/master/banner.png)
 
----
-
-<pre>
+```
 ██████╗ ██╗ ██████╗ ██████╗██╗ ██████╗ ███╗   ██╗ █████╗ ██████╗ ██╗ ██████╗ ███████╗
 ██╔══██╗██║██╔════╝██╔════╝██║██╔═══██╗████╗  ██║██╔══██╗██╔══██╗██║██╔═══██╗██╔════╝
 ██║  ██║██║██║     ██║     ██║██║   ██║██╔██╗ ██║███████║██████╔╝██║██║   ██║███████╗
 ██║  ██║██║██║     ██║     ██║██║   ██║██║╚██╗██║██╔══██║██╔══██╗██║██║   ██║╚════██║
 ██████╔╝██║╚██████╗╚██████╗██║╚██████╔╝██║ ╚████║██║  ██║██║  ██║██║╚██████╔╝███████║
 ╚═════╝ ╚═╝ ╚═════╝ ╚═════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚══════╝
-</pre>
+```
 
-### Diccionarios de: usuarios, claves, passwords, nombre de ficheros, carpetas, xss, pathtraversal, dorks, etc...
-#
-**usuarios.txt** / usuarios0-1.txt: Nombres de usuario comunes para fuerza bruta.
+# diccionarios — Wordlists para pentesting web
 
-**claves.txt** / claves0-3.txt: Contraseñas comunes para fuerza bruta.
+Colección de **diccionarios (wordlists)** en texto plano pensados para pruebas de seguridad web: fuerza bruta de usuarios/contraseñas, descubrimiento de ficheros y carpetas, fuzzing de parámetros, payloads de XSS/SQLi/Path Traversal/SSRF, Google Dorks y enumeración de subdominios.
 
-**clavescisco.txt**: Contraseñas predeterminadas o comunes para dispositivos Cisco.
+Este repositorio es el complemento natural de [`hackingyseguridad/fuzzer`](https://github.com/hackingyseguridad/fuzzer): sus scripts (`fuzzer.sh`, `directorios.sh`, `403bypass*.sh`, etc.) consumen directamente estos ficheros `.txt` como diccionarios de entrada.
 
-**GoogleHackingDorks.txt**: Lista de dorks (búsquedas avanzadas en Google) para encontrar vulnerabilidades.
+> ⚠️ **Aviso legal:** estos diccionarios están pensados exclusivamente para auditorías de seguridad autorizadas, laboratorios propios (CTF, entornos de prueba) o programas de *bug bounty* que permitan explícitamente pruebas de fuerza bruta/fuzzing. Usarlos contra sistemas de terceros sin autorización puede constituir un delito. El uso es responsabilidad exclusiva de quien lo ejecuta.
 
-**api.txt**: Diccionario para ataques a APIs (rutas, endpoints).
+---
 
-**apsx.txt**: Diccionario para fuerza bruta en archivos ASPX (Microsoft).
+## Tabla de contenidos
 
-**arvhivos.txt**: Lista de nombres de archivos comunes.
+- [Instalación / descarga](#instalación--descarga)
+- [Tabla resumen de diccionarios](#tabla-resumen-de-diccionarios)
+- [Descripción detallada por categoría](#descripción-detallada-por-categoría)
+  - [Usuarios y contraseñas](#1-usuarios-y-contraseñas)
+  - [Ficheros y carpetas](#2-ficheros-y-carpetas)
+  - [Tecnologías / extensiones](#3-tecnologías--extensiones)
+  - [Payloads de ataque web](#4-payloads-de-ataque-web)
+  - [Reconocimiento y enumeración](#5-reconocimiento-y-enumeración)
+  - [Otros / dispositivos y protocolos](#6-otros--dispositivos-y-protocolos)
+- [Scripts de prueba: cómo usar cada diccionario](#scripts-de-prueba-cómo-usar-cada-diccionario)
+- [Integración con el repositorio fuzzer](#integración-con-el-repositorio-fuzzer)
+- [Buenas prácticas](#buenas-prácticas)
+- [Licencia](#licencia)
 
-**archivos_iis.txt**: listado de nombres de ficheros comunes sobre IIS (Internet Information Server).
+---
 
-**asp.txt**: Diccionario para ataques a servidores ASP (Active Server Pages).
+## Instalación / descarga
 
-**carpetas.txt**: Lista de nombres de carpetas comunes en servidores web.
+Clonar el repositorio completo:
 
-**cgi.txt**: Diccionario para ataques a scripts CGI.
+```bash
+git clone https://github.com/hackingyseguridad/diccionarios
+cd diccionarios
+```
 
-**diccionario.txt**: Diccionario genérico de contraseñas.
+O descargar un diccionario suelto sin clonar todo el repositorio:
 
-**directorios.txt**: Similar a carpetas.txt, rutas de directorios.
-
-**ficheros.txt** / ficheros2.txt: Nombres de archivos para descubrir recursos expuestos.
-
-**htm.txt** / js.txt / jsp.txt / php.txt / xml.txt: Diccionarios para ataques a estos lenguajes/formatos.
-
-**ike.txt**: Diccionario para ataques a VPNs con IKE (Internet Key Exchange).
-
-**parametros.txt**: Parámetros comunes en URLs para inyección o fuzzing.
-
-**pathtraversal.txt**: Payloads para ataques de Path Traversal.
-
-**subdominios.txt** / subdominios2-3.txt: Listas de subdominios comunes para enumeración.
-
-**xss.txt**: Vectores de ataque XSS (Cross-Site Scripting).
-
-..
-
-
-###
-<img style="float:left" alt="netspy logo" src="https://github.com/hackingyseguridad/diccionarios/blob/master/25pass.png">
-
-### diccionario.txt Usuarios y contraseñas mas usadas, en lengua castellana ( español ) 
-
-Descargar:
-
+```bash
 wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/diccionario.txt
-
-### usuarios.txt  1000 usuarios o claves.txt , con passwords mas cumunes
-
-Descargar:
-
 wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/usuarios.txt
-
 wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/claves.txt
-
-### ficheros.txt  arvhivos y carpetas para fuzz
-
-Descargar:
-
 wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/ficheros.txt
-
-### xss.txt para pruebas XSS sobre WEB
-
-Descargar:
-
 wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/xss.txt
+wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/GoogleHackingDorks.txt
+```
 
-### dorks.txt. para busqueda en google de vulnerabilidades web y SQLi
+---
 
-Descargar:
+## Tabla resumen de diccionarios
 
-wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/dorks.txt
+| Fichero | Categoría | Contenido | Herramienta típica |
+|---|---|---|---|
+| `usuarios.txt`, `usuarios0.txt`, `usuarios1.txt` | Credenciales | Nombres de usuario comunes para fuerza bruta | `hydra`, `medusa`, `patator` |
+| `claves.txt`, `claves0.txt`, `claves2.txt`, `claves3.txt` | Credenciales | Contraseñas más comunes para fuerza bruta | `hydra`, `medusa`, `john` |
+| `diccionario.txt` | Credenciales | Usuarios y contraseñas más usados, en castellano | `hydra`, `wpscan` |
+| `clavescisco.txt` | Credenciales / dispositivos | Contraseñas por defecto/comunes de equipos Cisco | `hydra` (módulo `cisco`) |
+| `carpetas.txt`, `carpetas2.txt` | Ficheros y carpetas | Nombres de carpetas comunes en servidores web | `dirsearch`, `dirb`, `ffuf` |
+| `directorios.txt` | Ficheros y carpetas | Rutas de directorios (equivalente a `carpetas.txt`) | `dirsearch`, `ffuf`, `wfuzz` |
+| `ficheros.txt`, `ficheros2.txt` | Ficheros y carpetas | Nombres de ficheros para descubrir recursos expuestos | `fuzzer.sh`, `ffuf`, `wfuzz` |
+| `archivos.txt` | Ficheros y carpetas | Nombres de archivos genéricos comunes | `dirsearch`, `ffuf` |
+| `archivos_iis.txt` | Ficheros y carpetas | Ficheros típicos de servidores IIS | `dirsearch`, `ffuf` |
+| `api.txt` | Ficheros y carpetas | Rutas/endpoints comunes de APIs REST | `ffuf`, `wfuzz` |
+| `asp.txt`, `apsx.txt` | Tecnologías | Rutas/ficheros típicos de entornos ASP / ASP.NET | `dirsearch -e asp,aspx` |
+| `php.txt` | Tecnologías | Rutas/ficheros típicos de entornos PHP | `dirsearch -e php` |
+| `jsp.txt` | Tecnologías | Rutas/ficheros típicos de entornos Java (JSP) | `dirsearch -e jsp` |
+| `htm.txt` | Tecnologías | Rutas/ficheros con extensión `.htm`/`.html` | `dirsearch -e htm,html` |
+| `js.txt` | Tecnologías | Nombres de ficheros JavaScript comunes | `dirsearch -e js`, `ffuf` |
+| `xml.txt` | Tecnologías | Ficheros/rutas relacionadas con XML (config, sitemap, WSDL) | `dirsearch -e xml` |
+| `cgi.txt` | Tecnologías | Scripts CGI comunes (`cgi-bin`) | `dirsearch`, `nikto` |
+| `xss.txt` | Payloads de ataque | Vectores/payloads para pruebas de Cross-Site Scripting | `xsser`, `dalfox`, Burp Intruder |
+| `sqli.txt` | Payloads de ataque | Payloads para pruebas de inyección SQL | `sqlmap`, Burp Intruder |
+| `ssrf.txt` | Payloads de ataque | Payloads para pruebas de Server-Side Request Forgery | Burp Intruder, `ffuf` |
+| `pathtraversal.txt` | Payloads de ataque | Payloads de Path/Directory Traversal (`../../etc/passwd`, etc.) | `ffuf`, `wfuzz`, Burp Intruder |
+| `parametros.txt` | Payloads de ataque | Nombres de parámetros GET/POST habituales para fuzzing | `ffuf` (modo parámetros), `Arjun` |
+| `GoogleHackingDorks.txt` | Reconocimiento | Google Dorks para localizar información/vulnerabilidades expuestas vía buscador | búsqueda manual en Google/Bing |
+| `subdominios.txt`, `subdominios2.txt`, `subdominios3.txt` | Reconocimiento | Listas de subdominios comunes para enumeración | `httpx_subdominio.sh`, `gobuster dns`, `amass` |
+| `ike.txt` | Protocolos / VPN | Diccionario para ataques a VPNs con IKE (Internet Key Exchange) | `ike-scan`, `psk-crack` |
+| `http-fingerprints.lua.zip` | Fingerprinting | Script/base de datos Lua de huellas HTTP (identificación de servidores/dispositivos) | Nmap NSE (`http-fingerprints.lua`) |
 
-#
-...
+> Nota: el listado de ficheros de GitHub se trunca en "View all files"; si el repositorio incorpora nuevos diccionarios (por ejemplo `dorks.txt` mencionado en versiones previas del README), revisa el árbol completo del repositorio para confirmar el nombre exacto vigente.
 
+---
 
+## Descripción detallada por categoría
 
-http://www.hackingyseguridad.com/
+### 1. Usuarios y contraseñas
 
-#
+- **`usuarios.txt` / `usuarios0.txt` / `usuarios1.txt`** — variantes con distintos volúmenes/orígenes de nombres de usuario comunes (admin, root, nombres de pila habituales, cuentas de servicio típicas).
+- **`claves.txt` / `claves0.txt` / `claves2.txt` / `claves3.txt`** — variantes de contraseñas más filtradas/usadas, útiles para combinarlas con `usuarios.txt` en ataques de fuerza bruta o *credential stuffing* en entornos de prueba.
+- **`diccionario.txt`** — combinación de usuarios y contraseñas más usados específicamente en **castellano**, pensado para objetivos hispanohablantes.
+- **`clavescisco.txt`** — contraseñas por defecto o históricamente comunes en dispositivos de red Cisco (routers, switches).
+
+### 2. Ficheros y carpetas
+
+- **`carpetas.txt` / `carpetas2.txt` / `directorios.txt`** — nombres de directorios habituales en servidores web (`admin`, `backup`, `uploads`, `config`, `.git`, etc.), usados por `directorios.sh` y `dirb.sh` del repositorio `fuzzer`.
+- **`ficheros.txt` / `ficheros2.txt` / `archivos.txt`** — nombres de ficheros sueltos (backups, logs, configuraciones) para localizar recursos no enlazados.
+- **`archivos_iis.txt`** — ficheros específicos que aparecen típicamente en instalaciones de Microsoft IIS.
+- **`api.txt`** — rutas y nombres de endpoints habituales en APIs REST (`/api/v1/users`, `/api/login`, `/swagger.json`, etc.).
+
+### 3. Tecnologías / extensiones
+
+Diccionarios pensados para acompañar el flag de extensión (`-e`) de herramientas como `dirsearch`, agrupando nombres típicos según la pila tecnológica del objetivo: **`asp.txt`**, **`apsx.txt`** (ASP/ASP.NET), **`php.txt`** (PHP), **`jsp.txt`** (Java/JSP), **`htm.txt`** (HTML estático), **`js.txt`** (JavaScript), **`xml.txt`** (XML/config/WSDL) y **`cgi.txt`** (scripts CGI clásicos, `cgi-bin`).
+
+### 4. Payloads de ataque web
+
+- **`xss.txt`** — vectores de Cross-Site Scripting, desde payloads básicos hasta variantes de evasión de filtros.
+- **`sqli.txt`** — payloads para detectar inyección SQL (comillas, comentarios, *time-based*, *boolean-based*, *UNION-based*).
+- **`ssrf.txt`** — payloads para provocar peticiones del servidor hacia recursos internos/externos controlados por el auditor.
+- **`pathtraversal.txt`** — secuencias de salto de directorio (`../`, codificaciones alternativas) para intentar leer ficheros fuera del directorio raíz web.
+- **`parametros.txt`** — nombres de parámetros GET/POST habitualmente usados por aplicaciones (`id`, `page`, `redirect`, `debug`, `token`...), útiles para descubrir parámetros ocultos antes de aplicar los payloads anteriores.
+
+### 5. Reconocimiento y enumeración
+
+- **`GoogleHackingDorks.txt`** — consultas avanzadas de Google (*dorks*) para localizar mediante buscadores ficheros sensibles, paneles de login expuestos, mensajes de error, etc., sin tocar directamente el servidor objetivo.
+- **`subdominios.txt` / `subdominios2.txt` / `subdominios3.txt`** — listas de subdominios habituales (`www`, `mail`, `dev`, `staging`, `api`, `vpn`...) para enumeración por fuerza bruta de DNS, usadas por `httpx_subdominio.sh` del repositorio `fuzzer`.
+
+### 6. Otros / dispositivos y protocolos
+
+- **`ike.txt`** — diccionario orientado a ataques sobre el protocolo IKE (VPNs IPsec), típicamente usado con `ike-scan`/`psk-crack` para clave precompartida (PSK).
+- **`http-fingerprints.lua.zip`** — script Lua (para el motor de scripts NSE de Nmap) con firmas para identificar servidores/dispositivos por sus respuestas HTTP.
+
+---
+
+## Scripts de prueba: cómo usar cada diccionario
+
+Este repositorio contiene **solo los diccionarios**; los scripts que los consumen viven en [`hackingyseguridad/fuzzer`](https://github.com/hackingyseguridad/fuzzer). A continuación tienes ejemplos de uso directo de cada wordlist con herramientas habituales, útiles como scripts de prueba rápidos.
+
+### Fuerza bruta de credenciales (usuarios + claves)
+
+```bash
+# Login form / HTTP básico
+hydra -L usuarios.txt -P claves.txt dominio.com http-post-form \
+  "/login:user=^USER^&pass=^PASS^:Credenciales incorrectas"
+
+# SSH
+hydra -L usuarios.txt -P claves.txt ssh://dominio.com
+```
+
+### Descubrimiento de ficheros y carpetas
+
+```bash
+# Con dirsearch (usado internamente por fuzzer/directorios.sh)
+dirsearch -u https://dominio.com -w carpetas.txt -e php,asp,aspx,jsp,html -x 400-499,500-599
+
+# Con ffuf
+ffuf -u https://dominio.com/FUZZ -w ficheros.txt -mc 200,301,302,403
+```
+
+### Fuzzing de parámetros
+
+```bash
+ffuf -u "https://dominio.com/index.php?FUZZ=1" -w parametros.txt -fs 0
+```
+
+### Pruebas de XSS
+
+```bash
+# Con dalfox
+dalfox url "https://dominio.com/buscar?q=FUZZ" -w xss.txt
+
+# Con curl manual, uno por uno
+while read payload; do
+  curl -s "https://dominio.com/buscar?q=$payload" | grep -q "$payload" && echo "Posible XSS: $payload"
+done < xss.txt
+```
+
+### Pruebas de SQL Injection
+
+```bash
+sqlmap -u "https://dominio.com/producto?id=1" --level=3 --risk=2
+# o usar sqli.txt como diccionario de payloads manuales en Burp Intruder
+```
+
+### Path Traversal
+
+```bash
+while read payload; do
+  curl -s -o /dev/null -w "%{http_code} $payload\n" "https://dominio.com/download?file=$payload"
+done < pathtraversal.txt
+```
+
+### Enumeración de subdominios
+
+```bash
+# Con httpx (ver httpx_subdominio.sh en el repo fuzzer)
+sed 's/$/.dominio.com/' subdominios.txt | httpx -silent -status-code
+```
+
+### Google Dorks
+
+```bash
+# Uso manual: cada línea de GoogleHackingDorks.txt es una consulta a adaptar
+# Ejemplo de línea: intitle:"index of" "backup"
+# Se recomienda anteponer site:dominio.com y lanzar la búsqueda en el navegador
+```
+
+### Diccionario IKE / VPN
+
+```bash
+ike-scan -M dominio.com
+psk-crack -d ike.txt handshake.psk
+```
+
+---
+
+## Integración con el repositorio fuzzer
+
+La forma recomendada de usar estos diccionarios es junto con [`hackingyseguridad/fuzzer`](https://github.com/hackingyseguridad/fuzzer):
+
+```bash
+git clone https://github.com/hackingyseguridad/fuzzer
+git clone https://github.com/hackingyseguridad/diccionarios
+cd fuzzer
+cp ../diccionarios/ficheros.txt .
+cp ../diccionarios/carpetas.txt ../diccionarios/carpetas2.txt .
+sh fuzzer.sh https://dominio.com
+sh directorios.sh https://dominio.com
+```
+
+De este modo los scripts del repositorio `fuzzer` (que esperan encontrar `ficheros.txt`, `carpetas.txt`, `carpetas2.txt` en su propio directorio) usan directamente las wordlists de este repositorio.
+
+---
+
+[hackingyseguridad.com](http://www.hackingyseguridad.com/) · [github.com/hackingyseguridad/diccionarios](https://github.com/hackingyseguridad/diccionarios)
