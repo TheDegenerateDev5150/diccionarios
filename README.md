@@ -84,7 +84,7 @@ wget https://raw.githubusercontent.com/hackingyseguridad/diccionarios/master/Goo
 
 ## Tabla resumen de diccionarios
 
-| Fichero | Categoría | Contenido | Herramienta típica |
+| Fichero | Categoría | Contenido | Herramienta |
 |---|---|---|---|
 | `usuarios.txt`, `usuarios0.txt`, `usuarios1.txt` | Credenciales | Nombres de usuario comunes para fuerza bruta | `hydra`, `medusa`, `patator` |
 | `claves.txt`, `claves0.txt`, `claves2.txt`, `claves3.txt` | Credenciales | Contraseñas más comunes para fuerza bruta | `hydra`, `medusa`, `john` |
