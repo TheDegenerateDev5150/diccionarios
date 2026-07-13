@@ -313,4 +313,7 @@ sh directorios.sh https://dominio.com
 
 ---
 
-[hackingyseguridad.com](http://www.hackingyseguridad.com/) · [github.com/hackingyseguridad/diccionarios](https://github.com/hackingyseguridad/diccionarios)
+#
+[hackingyseguridad.com](http://www.hackingyseguridad.com/)
+#
+
